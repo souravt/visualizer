@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -14,20 +13,14 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import Tooltip from '@material-ui/core/Tooltip';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@mui/material/Button';
+
+
+import { BrowserRouter as Router, Routes, Route }
+    from 'react-router-dom';
 
 
 
-
-const Button = styled.button`
-  background-color: #3f51b5;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 5px;
-  outline: 0;
-  text-transform: uppercase;
-  margin: 10px 0px;
-  cursor: pointer;
-`;
 
 function App() {
 
@@ -72,12 +65,11 @@ function App() {
   }
    
 
-  return (
-   
+  return (  
 
 
     <div className="App">
-
+   
     <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>             
@@ -88,10 +80,14 @@ function App() {
                 src="tashumi.png"
               />
 
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>                
-                  <Button key="Ping" onClick={ping}>Ping</Button>
-                  <Button key="Send Message" onClick={sendMessage} >Send Message</Button>   
-                  <Button key="View Messages" onClick={fetchMessages}>View Messages</Button>   
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>    
+                  <Button key="Remote Monitoring" onClick={ping} color="inherit">Live View</Button>
+                  <Button key="Reports" onClick={ping} color="inherit">Reports</Button>
+                  <Button key="Administration" onClick={ping} color="inherit">Administration</Button>
+                  <Button key="Alerts" onClick={ping} color="inherit">Alerts</Button>
+                  <Button key="Ping" onClick={ping} color="inherit">Ping</Button>
+                  <Button key="Send Message" onClick={sendMessage} color="inherit">Send Message</Button> 
+                  <Button key="View Messages" onClick={fetchMessages} color="inherit">View Messages</Button>                   
               </Box>
             
           </Toolbar>
