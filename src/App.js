@@ -3,6 +3,19 @@ import './App.css';
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import Tooltip from '@material-ui/core/Tooltip';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
 
 
 const Button = styled.button`
@@ -18,13 +31,21 @@ const Button = styled.button`
 
 function App() {
 
-  const [pong, setPong] = useState("")
+  const [pong, setPong] = useState('')
   const [messages, setMessages] = useState([])
 
   const [id, setId] = useState("");
   const [message, setMessage] = useState("");
 
-  function clickMe() {  
+  const pages = ['Products', 'Pricing', 'Blog'];  
+
+  const handleCloseNavMenu = () => {
+    
+  };
+
+  
+
+  function ping() {  
     fetch('http://localhost:8081/ping', { method: 'GET' }) 
       .then(data => data.text())    
       .then(d => setPong(d)) 
@@ -52,17 +73,42 @@ function App() {
    
 
   return (
+   
+
+
     <div className="App">
+
+    <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>             
+
+              <Box
+                component="img"                
+                alt="Tashumi Digital"
+                src="tashumi.png"
+              />
+
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>                
+                  <Button key="Ping" onClick={ping}>Ping</Button>
+                  <Button key="Send Message" onClick={sendMessage} >Send Message</Button>   
+                  <Button key="View Messages" onClick={fetchMessages}>View Messages</Button>   
+              </Box>
+            
+          </Toolbar>
+        </Container>
+      </AppBar>
+
       <header >
 
       <div className="Ping">
-          <Button onClick={clickMe}>Send a ping</Button> <p>{pong}</p>
+          <Button onClick={ping}>Send a ping</Button> <p>{pong}</p>
         </div>  
         <div className="ViewMessage">
           <Button onClick={fetchMessages}>Fetch Messages</Button> 
           <center>
             {messages.map((dataObj, index) => {
               return (
+                
                 <div
                   style={{
                     width: "15em",
