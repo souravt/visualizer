@@ -1,19 +1,16 @@
 import './App.css';
 import React, { useState } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
 
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Tooltip from '@material-ui/core/Tooltip';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@mui/material/Button';
+import GoogleMapReact from 'google-map-react';
+import MarkerF from 'google-map-react';
+import StreetViewPanorama from 'google-map-react';
 
 
 import { BrowserRouter as Router, Routes, Route }
@@ -63,6 +60,14 @@ function App() {
         console.log(rejected);
     });
   }
+  
+  const mapStyles = {
+    width: '100%',
+    height: '100%'
+  };
+
+  
+  const center = useMemo(() => ({ lat: 7.4192661, lng: 3.8761708 }), []);
    
 
   return (  
@@ -81,11 +86,11 @@ function App() {
               />
 
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>    
-                  <Button key="Remote Monitoring" onClick={ping} color="inherit">Live View</Button>
-                  <Button key="Reports" onClick={ping} color="inherit">Reports</Button>
-                  <Button key="Administration" onClick={ping} color="inherit">Administration</Button>
+                  <Button key="Live View" onClick={ping} color="inherit">Live View</Button>
                   <Button key="Alerts" onClick={ping} color="inherit">Alerts</Button>
-                  <Button key="Ping" onClick={ping} color="inherit">Ping</Button>
+                  <Button key="Reports" onClick={ping} color="inherit">Reports</Button>  
+                  <Button key="Admin" onClick={ping} color="inherit">Administration</Button>
+                  <Button key="Ping" onClick={ping} color="inherit">Liveness Probe</Button>
                   <Button key="Send Message" onClick={sendMessage} color="inherit">Send Message</Button> 
                   <Button key="View Messages" onClick={fetchMessages} color="inherit">View Messages</Button>                   
               </Box>
@@ -94,10 +99,12 @@ function App() {
         </Container>
       </AppBar>
 
-      <header >
+      <header > </header>
+
+      <body>
 
       <div className="Ping">
-          <Button onClick={ping}>Send a ping</Button> <p>{pong}</p>
+      <p> <Button onClick={ping}>Send a ping</Button> : {pong}</p>
         </div>  
         <div className="ViewMessage">
           <Button onClick={fetchMessages}>Fetch Messages</Button> 
@@ -107,19 +114,18 @@ function App() {
                 
                 <div
                   style={{
-                    width: "15em",
+                    width: "40em",
                     backgroundColor: "#35D841",
                     padding: 2,
                     borderRadius: 10,
                     marginBlock: 10,
                   }}
                 >
-                  <p style={{ fontSize: 20, color: 'white' }}>{dataObj.message}</p>
-                  <p style={{ fontSize: 20, color: 'white' }}>{dataObj.id}</p>
+                  <p style={{ fontSize: 20, color: 'white' }}>ID : {dataObj.id} Message : {dataObj.message}</p>
                 </div>
               );
             })}
-      </center>
+          </center>
         </div>  
 
         <div className="SendMessage">       
@@ -128,10 +134,27 @@ function App() {
             <label> Message: <input type="text" value={message}  /> </label>
             <input type="submit" value="Send" />
           </form>       
-        </div>           
-      </header>
+        </div>  
+
+       <p></p>
+
+        <div style={{ height: '100vh', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: 'AIzaSyC-6Da6COS02HCn3RbbOkrzb25V8jQd_Io' }}
+            defaultCenter={{lat: 12.9716, lng: 77.594566}}
+            defaultZoom={15}
+          >
+             
+          </GoogleMapReact>
+        </div> 
+
+      </body>
+      
     </div>
+
+    
   );
 }
 
 export default App;
+
