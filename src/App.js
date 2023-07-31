@@ -9,8 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 import Button from '@mui/material/Button';
 import GoogleMapReact from 'google-map-react';
-import MarkerF from 'google-map-react';
-import StreetViewPanorama from 'google-map-react';
 
 
 import { BrowserRouter as Router, Routes, Route }
@@ -140,7 +138,7 @@ function App() {
 
         <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyC-6Da6COS02HCn3RbbOkrzb25V8jQd_Io' }}
+            bootstrapURLKeys={{ key: 'xxx' }}
             defaultCenter={{lat: 12.9716, lng: 77.594566}}
             defaultZoom={15}
           >
